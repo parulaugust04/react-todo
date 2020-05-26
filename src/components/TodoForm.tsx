@@ -8,7 +8,7 @@ export const TodoForm: FC<props> = ({addTodo}) =>{
         <form className="txt-c">
             <input 
                 type="text" 
-                className="font-lg"
+                className="font-lg todo-text"
                 value={text} 
                 placeholder="Enter your todo here"
                 onChange= {e =>setText(e.target.value)}
