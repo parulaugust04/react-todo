@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 ### `npm install`
-install all packages from packahe.json 
+install all packages from package.json 
 
 ### `npm start`
 
