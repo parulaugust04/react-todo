@@ -1,24 +1,17 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Fragment} from 'react';
 import '../App.css';
 import { TodoList } from '../components/TodoList';
 import {TodoForm} from '../components/TodoForm';
 
+//Custom Hook for local storage
 function useStateWithLocalStorage(localStorageKey){
-  const storedTodos = JSON.parse(localStorage.getItem('localStorageKey') || '');
-  const [value, setValue] = useState(storedTodos);
- 
-  useEffect(() => {
-    localStorage.setItem(localStorageKey, JSON.stringify(value));
-  }, [value]);
- 
-  return [value, setValue];
+  const storedTodos = JSON.parse(localStorage.getItem(localStorageKey)!);
+  const [value, setValue] = useState(storedTodos); 
+  return value;
 };
+
 function App() {
-  //Custom Hook for local storage
-  
-  // console.log(useStateWithLocalStorage('todos'));
-  const storedTodos: Todo[] = JSON.parse(localStorage.getItem('todos') || '');
-  const initialTodos: Todo[]=  storedTodos || [];
+  const initialTodos: Todo[]=  useStateWithLocalStorage('todos') || [];
   const [todos,setTodos] = useState(initialTodos);
 
   //Function for handling toggle of list items
@@ -48,7 +41,7 @@ function App() {
   const completedTasks= todos.filter(todo => todo.complete);
 
   return (
-    <div>
+    <Fragment>
       <TodoForm addTodo={addTodo}/>
       <TodoList 
         todos={todos} 
@@ -57,7 +50,7 @@ function App() {
       <p className="font-xl task-status"> 
         <span className="task-details">Total todos remaining:</span> <b>{todos.length - completedTasks.length}</b> out of <b>{todos.length}</b>
       </p>
-    </div>
+    </Fragment>
   );
 }
 

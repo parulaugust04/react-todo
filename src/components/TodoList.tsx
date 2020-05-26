@@ -6,10 +6,10 @@ interface Props {
 }
 export const TodoList: FC<Props> = ({todos, toggleTodo}) => {
    return (
-        <ul className="margin-l-xl todo-list">
-            {todos.map(todo =>(
+        <ul className="todo-list">
+            {todos.map((todo,index) =>(
                 <TodoItem 
-                    key={todo.text} 
+                    key={`${todo.text} ${index}`} 
                     todo={todo} 
                     toggleTodo={toggleTodo} 
                 />
